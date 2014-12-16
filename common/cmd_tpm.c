@@ -24,7 +24,7 @@
 #include <command.h>
 #include <tpm.h>
 
-#define MAX_TRANSACTION_SIZE 256
+#define MAX_TRANSACTION_SIZE 30
 
 /*
  * tpm_write() expects a variable number of parameters: the internal address
@@ -108,6 +108,7 @@ static int tpm_process_stress(int repeat_count)
 	return rv;
 }
 
+
 static int do_tpm_many(cmd_tbl_t *cmdtp, int flag,
 		       int argc, char * const argv[], int repeat_count)
 
@@ -130,8 +131,8 @@ static int do_tpm_many(cmd_tbl_t *cmdtp, int flag,
 	}
 
 	if (tis_open()) {
-		/* puts("tis_open() failed!\n");
-		return -1; */
+		puts("tis_open() failed!\n");
+		return -1;
 	}
 
 	rv = tpm_process(argc - 1, argv + 1, cmdtp);
