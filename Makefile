@@ -24,7 +24,7 @@
 VERSION = 2013
 PATCHLEVEL = 01
 SUBLEVEL =
-EXTRAVERSION =
+EXTRAVERSION = -rc3
 ifneq "$(SUBLEVEL)" ""
 U_BOOT_VERSION = $(VERSION).$(PATCHLEVEL).$(SUBLEVEL)$(EXTRAVERSION)
 else
@@ -285,7 +285,7 @@ LIBS-y += drivers/input/libinput.o
 LIBS-y += drivers/misc/libmisc.o
 LIBS-y += drivers/mmc/libmmc.o
 LIBS-y += drivers/mtd/libmtd.o
-LIBS-y += drivers/mtd/nand/libnand.o
+LIBS-$(CONFIG_NAND) += drivers/mtd/nand/libnand.o
 LIBS-y += drivers/mtd/onenand/libonenand.o
 LIBS-y += drivers/mtd/ubi/libubi.o
 LIBS-y += drivers/mtd/spi/libspi_flash.o
@@ -317,7 +317,10 @@ endif
 LIBS-y += drivers/rtc/librtc.o
 LIBS-y += drivers/serial/libserial.o
 LIBS-y += drivers/sound/libsound.o
-LIBS-$(CONFIG_GENERIC_LPC_TPM) += drivers/tpm/libtpm.o
+LIBS-$(CONFIG_TPM) += drivers/tpm/libtpm.o
+LIBS-$(CONFIG_TPM) += lib/tlcl/libtlcl.o
+LIBS-$(CONFIG_CRYPTO) += lib/crypto/libcrypto.o
+LIBS-$(CONFIG_SBOOT) += lib/sboot/libsboot.o
 LIBS-y += drivers/twserial/libtws.o
 LIBS-y += drivers/usb/eth/libusb_eth.o
 LIBS-y += drivers/usb/gadget/libusb_gadget.o
